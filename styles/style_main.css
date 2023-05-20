@@ -1,0 +1,593 @@
+h1,h2,h3,h4,h5,h6,p{
+    font-weight: 500;
+}
+body{
+	margin: 0px;
+	background: #1b1b1b;
+}
+html{
+	overflow-x:hidden
+}
+.main_header{
+ 	width: 1080px;
+ 	height: 885px;
+ 	margin: 0px auto;
+ 	overflow: hidden;
+}
+.Very_basement_block{
+	background: #0a0909;
+	width: 100%;
+	height: 88px;
+	left: 0px;
+	position: absolute;
+}
+.block{
+	background-color: rgba(0,0,0,.4);
+	width: 100%;
+	height: 885px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+.content_bar_block_Grust{
+	background: #151413;
+	width: 100%;
+	height: 553px;
+	left: 0px;
+	position: absolute;
+	overflow: hidden;
+}
+.basement_block{
+	background: #0c0b0b;
+	width: 100%;
+	height: 357px;
+	left: 0px;
+	position: absolute;
+	overflow: hidden;
+}
+.content_bar_block{
+	background: url(../assets/images/early-access.jpg);
+	width: 100%;
+	height: 522px;
+	left: 0px;
+	position: absolute;
+	overflow: hidden;
+	align-items: center;
+	background-size: cover;
+	background-position: center;
+}
+.block_medium{
+	background:green;
+	margin-top: 938px;
+	width: 100%;
+	height: 260px;
+	position: absolute;
+	top: 0;
+    left: 0;
+}
+.context_block_medium{
+    background:#151413;
+    margin-left: 0px;
+	width: 100%;
+	height: 1289px;
+	position: absolute;
+	top: 1251px;
+    left: 0;
+}
+
+.video_header{
+    width: 1920px;
+    position: relative;
+    z-index: -1;
+    margin-left: 0px;
+    background-size: cover; 
+    transform: translate(-50%, -50%);
+    left:50%;
+    top:50%;
+}
+
+.GRustlogobutton{
+	background-color: blue;
+	width: 48px;
+	height: 48px;
+	position:absolute;
+	margin-top: 30px;
+	margin-left: 20px;
+}
+.Grustlogo{
+	width: 48px;
+	height: 48px;
+}
+.GRustlogobutton:hover{
+	transition:  all 0.1s ease;
+	-webkit-transform: scale(1.03);
+	-ms-transform: scale(1.03);
+	transform: scale(1.03);
+}
+.Grustlogo:hover{
+	transition:  all 0.1s ease;
+    -webkit-transform: scale(1.03);
+	-ms-transform: scale(1.03);
+	transform: scale(1.03);
+}
+.header{
+	margin-top: 0px;
+	background: #1c1c1c;
+	width: 100%;
+	height: 112px;
+}
+
+.header_text{
+	position: absolute;
+	margin-top: 30px;
+	z-index: 2; 
+	margin-left: 630px;
+}
+
+.ul_header_text{
+	list-style: none;
+	display: flex;	
+}
+.li_header_text{
+    margin-left:30px; 
+}
+.a_header_text{
+	text-decoration: none;
+	color: #e4dad1;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 19px; 
+}
+.a_header_text:hover{
+	transition:  all 0.3s ease;
+	color: #ffff;
+}
+
+.a_header_text_Main{
+	text-decoration: none;
+	color: #e4dad1;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 19px; 
+	padding: 8px 10px 4px 10px;
+	background: #0695ff;
+}
+.Main_block_Text{
+	width: 530px;
+	height: 700px;
+	position: absolute;
+	margin-top: -930px;
+	margin-left: 20px;
+	z-index: 2;	
+}
+.a_header_text_Main:hover{
+	transition:  all 0.3s ease;
+	color: #ffff;
+
+}
+.text_header_main{
+	color: #e4dad1;
+	font-family: 'Open Sans', sans-serif;
+	margin-top: -140px;
+	font-size: 16px;
+}
+h2{
+	color: #e4dad1;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 190px; 
+	line-height: 0.8;
+	margin-top: 1100px;
+	margin-left: -4px;
+}
+.Main_header_text{
+    position: absolute;
+    margin-top: 10px;
+    z-index: 2;
+    margin-left: -39px;
+}
+.ul_header_text2{
+    list-style: none;
+	display: flex;	
+}
+.li_header_text2{
+}
+.text_on_medium{
+	position: absolute;
+	margin-top: 60px;
+	margin-left: 200px;
+	text-align: center;
+	width: 700px;
+	height: 80px;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 46px;
+	line-height: 0.9;
+	color: #e4dad1;
+}
+.PCGames_button{
+	position: absolute;
+	text-decoration: none;
+	color: #e4dad1;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 25px;
+	margin-top: 170px;
+	margin-left: 200px;
+	text-align: center;
+	width: 700px;
+}
+
+.a_header_text2{
+    text-decoration: none;
+	color: #e4dad1;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 30px;
+	background: #0695ff;
+	padding: 10px 20px 4px 20px;
+}
+.a_header_text2:hover{
+	background: #0b8beb;
+	transition:  all 0.1s ease;
+}
+.Content_bar_button{
+	position: absolute;
+    margin-top: 182px;
+    margin-left: -10px;
+    width: 1100px;
+    height: 618.75px;
+}
+.Content_bar_button:hover{
+	transition:  all 0.1s ease;
+	-webkit-transform: scale(1.01);
+	-ms-transform: scale(1.01);
+	transform: scale(1.01);
+}
+.ImageContent1{
+	width: 1100px;
+    height: 618.75px;
+	 
+}
+.LatestNews{
+	position: absolute;
+	margin-left: 55px;
+	margin-top:165px; 
+	z-index: 2;
+	color:#e4dad1;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 20px; 
+	z-index: 3;
+}
+.material-icons{
+	font-size:20px; 
+	background:#0695ff;
+	width: 125px;
+	height: 33px;
+	position: absolute;
+	margin-left: 10px;
+	margin-top:155px; 
+	padding-left: 16px;
+	padding-top:10px;
+	z-index: 2;
+	color:#e4dad1;
+
+}
+.content_bar_on_bar{
+	background: #1f1f1f;
+	position: absolute;
+    margin-top: 725px;
+    margin-left:90px;
+    width: 880px;
+    height: 423px;
+}
+.content_bar_on_bar:hover{
+	transition:  all 0.3s ease;
+	background: #282828;
+}
+.ImageContent1:hover{
+	transition:  all 0.1s ease;
+	-webkit-transform: scale(1.01);
+	-ms-transform: scale(1.01);
+	transform: scale(1.01);
+}
+.September_Update {
+	color: #e4dad1;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 60px;
+	text-align: center;
+}
+.daysago{
+	position: absolute;
+	color: #e4dad1;
+	font-family: 'Bebas Neue', cursive;
+	background: #0695ff;
+	width: 72px;
+	height: 28px;
+	margin-top:-50px; 
+	margin-left: 350px;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+.DEVBLOG{
+	position: absolute;
+	color: #e4dad1;
+	font-family: 'Bebas Neue', cursive;
+	text-decoration: none;
+	background:#0695ff;
+	width: 53px;
+	height: 28px;
+	margin-top:-50px; 
+	margin-left: 51%;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+.DEVBLOG:hover{
+	background:#0b8beb; 
+	transition:  all 0.1s ease;
+}
+.Underwater{
+    position: absolute;
+	color: #a29b93;
+	font-family: 'Open Sans', sans-serif;
+	width: 570px;
+	font-size: 16px;
+	text-align: center;
+	margin-left: 150px;
+}
+.READMORE{
+	color: #e4dad1;
+	position: absolute;
+    text-decoration: none;
+	background:#0695ff;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 22px;
+	margin-left: 390px;
+	margin-top: 100px;
+	padding-top: 10px;
+	padding-left: 10px;
+	width: 85px;
+	height: 35px;
+}
+.READMORE:hover{
+    background:#0b8beb; 
+	transition:  all 0.1s ease; 
+}
+.a_header_text3{
+    text-decoration: none;
+	color: #e4dad1;
+	margin-left: 10px;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 30px;
+	background: #2a2928;
+	border: 2px solid;
+	border-color: #4c4946;
+	padding: 8px 20px 4px 20px;
+}
+
+.a_header_text3:hover{
+   background: #4c4946;
+   transition:  all 0.1s ease;
+}
+.bar{
+	background:#1b1b1b;
+	width: 100%;
+	height: 53px;
+}
+
+.bar2{
+	background:#1b1b1b;
+	width: 100%;
+	height: 53px;
+
+}
+.bar3{
+	background:#141312;
+	width: 100%;
+	height: 53px;
+	z-index: 2;
+}
+.TwitchDrops{
+	color: #e4dad1;
+	position: absolute;
+    z-index: 2;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 120px;
+    margin-left: 285px;
+    margin-top: 160px;
+}
+.MonthlyText{
+	color: #4c90fd;
+	position: absolute;
+    z-index: 2;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 17px;
+    margin-left: 250px;
+    margin-top: 320px;
+}
+.Grust_text{
+	position: absolute;
+	color:#e4dad1 ;
+	font-size: 135px;
+	margin-top: 60px;
+	margin-left: 0px;
+	font-family: 'Bebas Neue', cursive;
+}
+.Companion_text{
+	position: absolute;
+	color:#e4dad1 ;
+	font-size: 65px;
+	margin-top: 175px;
+	margin-left: 7px;
+	font-family: 'Bebas Neue', cursive;
+}
+.Theofficial_text{
+	position: absolute;
+	margin-top: 270px;
+	margin-left: 8px;
+	line-height: 1.5;
+	width: 560px;
+	height: 80px;
+	color: #968f88;
+	font-size: 17px;
+	font-family: 'Open Sans', sans-serif;
+}
+.Learnmore_text{
+	position: absolute;
+	color:#e4dad1 ;
+	text-decoration: none;
+	font-family: 'Bebas Neue', cursive;
+	margin-top: 370px;
+	margin-left: 7px;
+	font-size: 20px;
+	background: #0695ff;
+	width: 90px;
+	height: 35px;
+	padding-left: 15px;
+	padding-top: 10px;
+}
+.Learnmore_text:hover{
+	background:#0b8beb; 
+    transition:  all 0.1s ease;
+}
+.iamge_content3{
+	position: absolute;
+	margin-top: -120px;
+	margin-left: 500px;
+	width: 560px;
+	height: 560px;
+}
+.GetTwichDrops{
+	position: absolute;
+    z-index: 2;
+    text-decoration: none;
+    color: #e4dad1;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 27px;
+    margin-top: 390px;
+    margin-left: 510px;
+    background: #0695ff;
+    padding-left: 20px;
+    padding-top: 10px;
+    width: 52px;
+    height: 43px;
+}
+.GetTwichDrops:hover{
+    background: #0b8beb;
+    transition:  all 0.1s ease;
+}
+
+.bar4{
+	background:#141312;
+	width: 100%;
+	height: 53px;
+}
+
+.medium_text_bar{
+	background:#1b1b1b;
+	margin:0 auto;
+	margin-top: 60px;
+	width: 1080px;
+	height: 260px;
+}
+.content_bar_1{
+	margin:0 auto;
+	width: 1080px;
+	height: 1280px;
+}
+.content_bar_2{
+	margin: 0 auto;
+	width: 1080px;
+	height: 522px;
+}
+
+.content_bar_3{
+	margin: 0 auto;
+	width: 1080px;
+	height: 553px;
+	z-index: 2;
+}
+.help_block{
+	background: #3B8946;
+	width: 100%;
+	height: 558px;
+}
+.image{
+	background:url(../assets/images/supermarket-overview.jpg);
+	width: 100%;
+	height: 453px;
+	background-attachment: fixed;
+	align-items: center;
+	background-size: cover;
+	background-position: center;
+}
+.Grust_X_zohart{
+	margin-top: 115px;
+	position: absolute;
+	margin-left: 300px;
+}
+.ul_text3{
+	position: absolute;
+	list-style: none;
+	display: flex;
+	margin-top: 230px;	
+	margin-left: 265px;
+}
+.li_text3{
+	margin-left: 25px;
+}
+.a_text3{
+	color: #b4aba2;
+	text-decoration: none;
+	font-family: 'Bebas Neue', cursive;
+	font-size: 19px;
+}
+.a_text3:hover{
+	color: #dfd5cc;
+	transition:  all 0.1s ease;
+}
+.block2{
+	background: rgb(0,0,0,0.4);
+	width: 100%;
+	height: 453px;
+	margin-top: 0px;
+	position: absolute;
+	z-index: 2;	
+}
+.basement_info{
+	background: #0c0b0b;
+	width: 1080px;
+	height: 357px;	
+	margin: 0 auto;
+}
+.basement{
+	background: #0a0909;
+	width: 1080px;
+	height: 88px;
+	margin: 0 auto;
+}
+
+.basement_text{
+	position: absolute;
+	color:#746e69;
+	font-family: 'Inter';
+	font-size: 20px;
+	margin-top: 35px;
+	margin-left: 40px;
+}
+.ul_basement_3{
+	display: flex;
+	list-style: none;
+	position: absolute;
+	margin-top: 30px;
+	margin-left: 920px;
+}
+.li_basement_3{
+}
+.a_basement_3{
+    margin-left: 12px;
+}
+.discord:hover{
+	fill:#0b8beb;
+	transition:  all 0.1s ease;
+
+}
+.youtube:hover{
+	fill:#0b8beb;
+	transition:  all 0.1s ease;
+}

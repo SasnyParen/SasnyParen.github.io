@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+   }
+
+
+html {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: #1C1C1C;
+     padding-top: 0;
+}
+
+.Char {
+	position: absolute;
+	top: 10vh; left: 70px;
+	width: 178px;
+	height: 77px;
+
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 64px;
+	line-height: 77px;
+
+	color: white;
+}
+
+.Char::first-letter {
+  color: #8F00FF;
+}
+
+.desc {
+	position: absolute;
+	top: 19vh; left: 70px;
+	width: 658px;
+	height: 44px;
+
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 36px;
+	line-height: 44px;
+	color: #FFFFFF;
+}
+
+.about{
+
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 35px;
+	line-height: 77px;
+	display: flex;
+	align-items: center;
+
+
+	color: #FFFFFF;
+	margin-left: 70px;
+	margin-top: 50px;
+}
+
+.text {
+	margin-left: 70px;
+	margin-top: 20px;
+
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 400;
+	font-size: 25px;
+	line-height: 44px;
+	align-items: center;
+	width: 160vh;
+	height: 220px;
+	color: #FFFFFF;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}

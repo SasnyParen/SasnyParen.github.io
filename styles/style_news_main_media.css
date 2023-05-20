@@ -1,0 +1,118 @@
+@media screen and (max-width: 1152px){
+.background_block_news_main{
+	display: grid;
+	width: 722px;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 30px;
+    transition:  all 0.5s ease;
+}
+.Update_block_news_main{
+	width: 720px;
+    margin: 0px auto;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+}
+@media screen and (max-width: 1097px){
+.Main_text_news_main{
+	position: absolute;
+    color: #e4dad1;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 60px;
+    width: 500px;
+    margin-left: 0px;
+    text-align: center;
+    margin-top: 230px;
+    transition:  all 0.5s ease;
+}
+.Main_news{
+	position: absolute;
+    color: #afb6b3;
+    font-family: 'Open Sans', sans-serif;
+    width: 350px;
+    font-size: 16px;
+    text-align: center;
+    margin-left: 75px;
+    margin-top: 320px;
+    transition:  all 0.5s ease;
+}
+.Main_button{
+	position: absolute;
+    color: #e4dad1;
+    font-family: 'Bebas Neue', cursive;
+    text-decoration: none;
+    background: #0695ff;
+    width: 83px;
+    font-size: 20px;
+    height: 33px;
+    margin-top: 410px;
+    margin-left: 200px;
+    padding-top: 10px;
+    padding-left: 15px;
+    transition:  all 0.5s ease;
+}
+}
+@media screen and (max-width: 757px){
+	.Update_block_news_main{
+	width: 340px;
+    margin: 0px auto;
+    overflow: hidden;
+    transition: all 0.5s ease;
+}
+.background_block_news_main{
+	display: grid;
+	width: 340px;
+    grid-template-columns: repeat(1,1fr);
+    grid-gap: 30px;
+    transition:  all 0.5s ease;
+}
+.holder_image{
+	width: 330px;
+	height: 240px;
+	transition:  all 0.5s ease;
+}
+.img_news{
+	width: 330px;
+	height: 240px;
+	transition:  all 0.5s ease;
+}
+}
+@media screen and (max-width: 500px){
+	.Main_text_news_main{
+	position: absolute;
+    color: #e4dad1;
+    font-family: 'Bebas Neue', cursive;
+    font-size: 50px;
+    width: 340px;
+    margin-left: 0px;
+    text-align: center;
+    margin-top: 230px;
+    transition:  all 0.5s ease;
+}
+.Main_news{
+	position: absolute;
+    color: #afb6b3;
+    font-family: 'Open Sans', sans-serif;
+    width: 330px;
+    font-size: 16px;
+    text-align: center;
+    margin-left: 10px;
+    margin-top: 320px;
+    transition:  all 0.5s ease;
+}
+.Main_button{
+	position: absolute;
+    color: #e4dad1;
+    font-family: 'Bebas Neue', cursive;
+    text-decoration: none;
+    background: #0695ff;
+    width: 83px;
+    font-size: 20px;
+    height: 33px;
+    margin-top: 410px;
+    margin-left: 125px;
+    padding-top: 10px;
+    padding-left: 15px;
+    transition:  all 0.5s ease;
+}
+}
