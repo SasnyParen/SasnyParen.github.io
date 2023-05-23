@@ -1,55 +1,4 @@
-.Image_news_main{
-    background: url(../img/kirito.png);
-    position: absolute;
-    width: 100%;
-    height: 603px;
-    z-index: -5;
-    padding-top: 350px;
-    align-items: center;
-    background-size: cover;
-    background-position: center;
-}
-.Main_text_news_main{
-	position: absolute;
-    color: #e4dad1;
-    font-family: 'Bebas Neue', cursive;
-    font-size: 96px;
-    margin-left: 20px;
-    margin-top: 230px;
-}
-.Main_news{
-	position: absolute;
-    color: #afb6b3;
-    font-family: 'Open Sans', sans-serif;
-    width: 600px;
-    font-size: 16px;
-    margin-left: 20px;
-    margin-top: 370px;
-}
-.Main_button{
-	position: absolute;
-    color: #e4dad1;
-    font-family: 'Bebas Neue', cursive;
-    text-decoration: none;
-    background: #0695ff;
-    width: 83px;
-    font-size: 20px;
-    height: 33px;
-    margin-top: 430px;
-    margin-left: 20px;
-    padding-top: 10px;
-    padding-left: 15px;
-}
-.Main_button:hover{
-    background: #0b8beb;
-    transition:  all 0.1s ease;
-}
-.background_block_news_main{
-	display: grid;
-	width: 1098px;
-    grid-template-columns: repeat(3,1fr);
-    grid-gap: 30px;
-}
+
 .news_block_main{
 	margin-top: 31px;
 	width: 346px;
@@ -126,52 +75,21 @@
 	font-size: 16px;
 	font-family: 'Open Sans', sans-serif;
 }
-.button_date_Community{
-	font-size: 20px;
-    width: 80px;
-    color: #e4dad1;
-    font-family: 'Bebas Neue', cursive;
-    text-decoration: none;
-    background: #5D7239;
-    position: absolute;
-    height: 30px;
-    margin-left: 100px;
-    margin-top: 250px;
-    padding-left: 10px;
-    padding-top: 5px;
-    font-family: 'Bebas Neue', cursive;
-    transition: all 0.5s ease;
-}
-.button_date_Community:hover{
-	background: #536535;
-	transition:  all 0.1s ease;
-}
-.button_date_General{
-	font-size: 20px;
-    width: 63px;
-    color: #e4dad1;
-    font-family: 'Bebas Neue', cursive;
-    text-decoration: none;
-    background: #333231;
-    position: absolute;
-    height: 30px;
-    margin-left: 100px;
-    margin-top: 250px;
-    padding-left: 10px;
-    padding-top: 5px;
-    font-family: 'Bebas Neue', cursive;
-    transition: all 0.5s ease;
-}
-.button_date_General:hover{
-	background: #484746;
-	transition:  all 0.1s ease;
-}
+
+
 .Update_block_news_main{
-	background: #1b1b1b;
+    background: #1b1b1b;
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 1080px;
     padding-top: 0.1px;
     padding-bottom: 30px;
+}
+
+.background_block_news_main{
+    display: grid;
+    width: 1098px;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 30px;
 }
