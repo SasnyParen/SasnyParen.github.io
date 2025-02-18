@@ -1,80 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background: #111;
-            color: #fff;
+            margin: 0;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            font-family: 'Times New Roman', serif;
+            overflow: hidden;
+        }
+
+        .loading-container {
             text-align: center;
-        }
-        #progress-bar {
-            width: 80%;
-            height: 10px;
-            background: #333;
-            border-radius: 5px;
-            margin: 20px 0;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 300px;
         }
-        #progress {
+
+        .circle-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+        }
+
+        .rune-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            border: 2px solid #4a4a4a;
+            border-radius: 50%;
+            animation: rotate 8s linear infinite;
+        }
+
+        .inner-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 160px;
+            height: 160px;
+            border: 1px solid #6b5b95;
+            border-radius: 50%;
+            animation: rotate 12s linear infinite reverse;
+        }
+
+        .outer-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 240px;
+            height: 240px;
+            border: 1px solid #6b5b95;
+            border-radius: 50%;
+            animation: rotate 16s linear infinite;
+        }
+
+        .loading-text {
+            margin-top: 40px;
+            font-size: 24px;
+            letter-spacing: 4px;
+            animation: pulse 2s infinite;
+        }
+
+        .server-name {
+            font-size: 36px;
+            letter-spacing: 6px;
+            color: #6b5b95;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            width: 80%;
+            height: 4px;
+            background: #4a4a4a;
+            position: absolute;
+            bottom: 10%;
+            overflow: hidden;
+        }
+
+        .progress-bar-inner {
             height: 100%;
             width: 0%;
-            background: #4CAF50;
-            border-radius: 5px;
+            background: #6b5b95;
+            transition: width 0.3s ease;
         }
-        #tip {
-            font-size: 14px;
-            color: #bbb;
+
+        .tip-text {
+            position: absolute;
+            bottom: 5%;
+            font-size: 18px;
+            opacity: 0.7;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .glitch-char {
+            display: inline-block;
+            animation: glitch-char 0.2s infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        @keyframes glitch-char {
+            0%, 100% { transform: translate(0, 0); }
+            25% { transform: translate(var(--glitch-x1), var(--glitch-y1)); }
+            50% { transform: translate(var(--glitch-x2), var(--glitch-y2)); }
+            75% { transform: translate(var(--glitch-x3), var(--glitch-y3)); }
         }
     </style>
 </head>
 <body>
-    <h1 id="server-name">Connecting...</h1>
-    <p id="status">Initializing...</p>
-    <div id="progress-bar">
-        <div id="progress"></div>
-    </div>
-    <p id="tip"></p>
+    <div class="server-name" id="server-name">Загрузка...</div>
     
+    <div class="loading-container">
+        <div class="circle-container">
+            <div class="outer-circle"></div>
+            <div class="rune-circle"></div>
+            <div class="inner-circle"></div>
+        </div>
+        <div class="loading-text" id="status">Инициализация...</div>
+    </div>
+    
+    <div class="progress-bar"><div class="progress-bar-inner" id="progress"></div></div>
+    <div class="tip-text" id="tip"></div>
+
     <script>
         const tips = [
-            "Use magic wisely!",
-            "Teamwork is key to success!",
-            "Explore every corner of the world!",
-            "Remember to manage your inventory!"
+            "Вы знали что кровотечение увеличивается от вашего интеллекта?",
+            "Кинжал не очень хорош против двуручного меча",
+            "Не пытайтесь найти все кристаллы",
+            "Бог смотрит за тобой"
         ];
-        document.getElementById("tip").innerText = tips[Math.floor(Math.random() * tips.length)];
-        
-        function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language) {
-            document.getElementById("server-name").innerText = servername || "Loading Server...";
+
+        const glitchTips = ["Бог смотрит за тобой"];
+
+        function createGlitchChar(char) {
+            const x1 = (Math.random() * 10 - 5);
+            const y1 = (Math.random() * 10 - 5);
+            const x2 = (Math.random() * 10 - 5);
+            const y2 = (Math.random() * 10 - 5);
+            const x3 = (Math.random() * 10 - 5);
+            const y3 = (Math.random() * 10 - 5);
+            
+            return `<span class="glitch-char" style="--glitch-x1: ${x1}px; --glitch-y1: ${y1}px; --glitch-x2: ${x2}px; --glitch-y2: ${y2}px; --glitch-x3: ${x3}px; --glitch-y3: ${y3}px;">` +
+                   (Math.random() < 0.1 ? '∎' : char) +
+                   "</span>";
         }
 
-        function SetFilesTotal(total) {
-            window.totalFiles = total;
+        function applyGlitchEffect(text) {
+            return text.split('').map(char => {
+                return char === ' ' ? ' ' : createGlitchChar(char);
+            }).join('');
         }
 
-        function SetFilesNeeded(needed) {
-            if (window.totalFiles) {
-                let progress = ((window.totalFiles - needed) / window.totalFiles) * 100;
-                document.getElementById("progress").style.width = progress + "%";
-            }
+        function updateGlitchAnimation() {
+            const glitchElements = document.querySelectorAll('.glitch-char');
+            glitchElements.forEach(element => {
+                const x1 = (Math.random() * 10 - 5);
+                const y1 = (Math.random() * 10 - 5);
+                const x2 = (Math.random() * 10 - 5);
+                const y2 = (Math.random() * 10 - 5);
+                const x3 = (Math.random() * 10 - 5);
+                const y3 = (Math.random() * 10 - 5);
+                
+                element.style.setProperty('--glitch-x1', `${x1}px`);
+                element.style.setProperty('--glitch-y1', `${y1}px`);
+                element.style.setProperty('--glitch-x2', `${x2}px`);
+                element.style.setProperty('--glitch-y2', `${y2}px`);
+                element.style.setProperty('--glitch-x3', `${x3}px`);
+                element.style.setProperty('--glitch-y3', `${y3}px`);
+            });
         }
 
-        function DownloadingFile(fileName) {
-            document.getElementById("status").innerText = "Downloading: " + fileName;
+        function updateTip() {
+            let tipElement = document.getElementById("tip");
+            tipElement.style.opacity = 0;
+            setTimeout(() => {
+                let tip = tips[Math.floor(Math.random() * tips.length)];
+                if (glitchTips.includes(tip)) {
+                    tip = applyGlitchEffect(tip);
+                    // Start updating glitch animation for this tip
+                    setInterval(updateGlitchAnimation, 200);
+                }
+                tipElement.innerHTML = tip;
+                tipElement.style.opacity = 1;
+            }, 1000);
         }
 
-        function SetStatusChanged(status) {
-            document.getElementById("status").innerText = status;
-        }
+        setInterval(updateTip, 5000);
+        updateTip();
     </script>
 </body>
 </html>
