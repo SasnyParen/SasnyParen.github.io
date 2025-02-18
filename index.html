@@ -162,7 +162,7 @@
     </style>
 </head>
 <body>
-    <div class="server-name" id="server-name">Загрузка...</div>
+    <div class="server-name" id="server-name"></div>
     
     <div class="loading-container">
         <div class="circle-container">
@@ -175,7 +175,7 @@
             </div>
             <div class="inner-circle"></div>
         </div>
-        <div class="status" id="status">Инициализация...</div>
+        <div class="status" id="status"></div>
     </div>
     
     <div class="progress-bar"><div class="progress-bar-inner" id="progress"></div></div>
@@ -189,17 +189,6 @@
 
         function SetStatusChanged(status) {
             document.getElementById("status").innerText = status;
-        }
-
-        function SetFilesTotal(total) {
-            window.totalFiles = total;
-        }
-
-        function SetFilesNeeded(needed) {
-            if (window.totalFiles) {
-                const progress = 100 - (needed / window.totalFiles) * 100;
-                document.getElementById("progress").style.width = progress + "%";
-            }
         }
         
         const tips = [
