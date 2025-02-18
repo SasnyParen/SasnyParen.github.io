@@ -1,93 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
     <style>
         body {
-            margin: 0;
-            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #111;
+            color: #fff;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: #1a1a1a;
-            color: #e0e0e0;
-            font-family: 'Times New Roman', serif;
-            overflow: hidden;
-        }
-
-        .loading-container {
+            height: 100vh;
             text-align: center;
+        }
+        #progress-bar {
+            width: 80%;
+            height: 10px;
+            background: #333;
+            border-radius: 5px;
+            margin: 20px 0;
             position: relative;
         }
-
-        .rune-circle {
-            width: 200px;
-            height: 200px;
-            border: 2px solid #4a4a4a;
-            border-radius: 50%;
-            position: relative;
-            animation: rotate 8s linear infinite;
+        #progress {
+            height: 100%;
+            width: 0%;
+            background: #4CAF50;
+            border-radius: 5px;
         }
-
-        .rune {
-            position: absolute;
-            font-size: 24px;
-            color: #6b5b95;
-            opacity: 0.8;
-        }
-
-        .rune:nth-child(1) { top: 0; left: 50%; transform: translateX(-50%); }
-        .rune:nth-child(2) { top: 50%; right: 0; transform: translateY(-50%); }
-        .rune:nth-child(3) { bottom: 0; left: 50%; transform: translateX(-50%); }
-        .rune:nth-child(4) { top: 50%; left: 0; transform: translateY(-50%); }
-
-        .loading-text {
-            margin-top: 40px;
-            font-size: 24px;
-            letter-spacing: 4px;
-            animation: pulse 2s infinite;
-        }
-
-        .server-name {
-            position: absolute;
-            top: 20%;
-            font-size: 36px;
-            letter-spacing: 6px;
-            color: #6b5b95;
-        }
-
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
-        }
-
-        .status-text {
-            position: absolute;
-            bottom: 20%;
-            font-size: 18px;
-            opacity: 0.7;
+        #tip {
+            font-size: 14px;
+            color: #bbb;
         }
     </style>
 </head>
 <body>
-    <div class="server-name">MYSTICAL REALM</div>
-    
-    <div class="loading-container">
-        <div class="rune-circle">
-            <div class="rune">☘</div>
-            <div class="rune">✧</div>
-            <div class="rune">❋</div>
-            <div class="rune">✦</div>
-        </div>
-        <div class="loading-text">ENTERING THE REALM</div>
+    <h1 id="server-name">Connecting...</h1>
+    <p id="status">Initializing...</p>
+    <div id="progress-bar">
+        <div id="progress"></div>
     </div>
+    <p id="tip"></p>
     
-    <div class="status-text">Preparing your journey...</div>
+    <script>
+        const tips = [
+            "Use magic wisely!",
+            "Teamwork is key to success!",
+            "Explore every corner of the world!",
+            "Remember to manage your inventory!"
+        ];
+        document.getElementById("tip").innerText = tips[Math.floor(Math.random() * tips.length)];
+        
+        function GameDetails(servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language) {
+            document.getElementById("server-name").innerText = servername || "Loading Server...";
+        }
+
+        function SetFilesTotal(total) {
+            window.totalFiles = total;
+        }
+
+        function SetFilesNeeded(needed) {
+            if (window.totalFiles) {
+                let progress = ((window.totalFiles - needed) / window.totalFiles) * 100;
+                document.getElementById("progress").style.width = progress + "%";
+            }
+        }
+
+        function DownloadingFile(fileName) {
+            document.getElementById("status").innerText = "Downloading: " + fileName;
+        }
+
+        function SetStatusChanged(status) {
+            document.getElementById("status").innerText = status;
+        }
+    </script>
 </body>
 </html>
