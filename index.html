@@ -182,6 +182,26 @@
     <div class="tip-text" id="tip"></div>
 
     <script>
+
+        function GameDetails(servername) {
+            document.getElementById("server-name").innerText = servername || "Загрузка сервера...";
+        }
+
+        function SetStatusChanged(status) {
+            document.getElementById("status").innerText = status;
+        }
+
+        function SetFilesTotal(total) {
+            window.totalFiles = total;
+        }
+
+        function SetFilesNeeded(needed) {
+            if (window.totalFiles) {
+                const progress = 100 - (needed / window.totalFiles) * 100;
+                document.getElementById("progress").style.width = progress + "%";
+            }
+        }
+        
         const tips = [
             "Вы знали что кровотечение увеличивается от вашего интеллекта?",
             "Кинжал не очень хорош против двуручного меча",
