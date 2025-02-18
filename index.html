@@ -43,6 +43,37 @@
             animation: rotate 8s linear infinite;
         }
 
+        .rune {
+            position: absolute;
+            font-size: 24px;
+            color: #6b5b95;
+            opacity: 0.8;
+        }
+
+        .rune:nth-child(1) {
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .rune:nth-child(2) {
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+        }
+
+        .rune:nth-child(3) {
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .rune:nth-child(4) {
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
         .inner-circle {
             position: absolute;
             top: 50%;
@@ -136,7 +167,12 @@
     <div class="loading-container">
         <div class="circle-container">
             <div class="outer-circle"></div>
-            <div class="rune-circle"></div>
+            <div class="rune-circle">
+                <div class="rune">☘</div>
+                <div class="rune">✧</div>
+                <div class="rune">❋</div>
+                <div class="rune">✦</div>
+            </div>
             <div class="inner-circle"></div>
         </div>
         <div class="loading-text" id="status">Инициализация...</div>
@@ -150,10 +186,16 @@
             "Вы знали что кровотечение увеличивается от вашего интеллекта?",
             "Кинжал не очень хорош против двуручного меча",
             "Не пытайтесь найти все кристаллы",
-            "Бог смотрит за тобой"
+            "Богиня не довольна вами",
+            "Сможете ли вы найти рецепт забытого воскрешающего зелья?",
+            "Помните, что вам нужно больше золота",
+            "Благословение богини покинуло вас...",
+            "Не ходите ночью возле руин",
+            "Ходят слухи что в старом городе Астерия досих пор блуждают духи мертвых",
+            "Для использования магии на себя, удерживайте кнопку R",
         ];
 
-        const glitchTips = ["Бог смотрит за тобой"];
+        const glitchTips = ["Богиня не довольна вами", "Благословение богини покинуло вас...", "Ходят слухи что в старом городе Астерия досих пор блуждают духи мертвых",];
 
         function createGlitchChar(char) {
             const x1 = (Math.random() * 10 - 5);
