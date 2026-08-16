@@ -1,266 +1,369 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: #1a1a1a;
-            color: #e0e0e0;
-            font-family: 'Times New Roman', serif;
-            overflow: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loading...</title>
+<style>
+:root{
+  --accent:      #ff7a1a;
+  --accent-2:    #ffc107;
+  --banner-bg:   #c9c7d6;
+  --banner-text: #14131a;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:#0b0d12;
+  font-family:"Bahnschrift","Segoe UI Semibold","Arial Narrow",Roboto,Arial,sans-serif;
+  color:#fff;user-select:none;cursor:none}
 
-        .loading-container {
-            text-align: center;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 300px;
-        }
+#bg,#bg2{position:fixed;inset:0;background:center/cover no-repeat;
+  transition:opacity 1.2s ease;z-index:0}
+#bg2{z-index:1;opacity:0}
+#bg2.on{opacity:1}
+#bg.fallback{
+  background:
+    radial-gradient(120% 90% at 75% 30%, rgba(120,140,160,.35) 0%, transparent 60%),
+    radial-gradient(90% 70% at 15% 80%, rgba(255,122,26,.10) 0%, transparent 60%),
+    linear-gradient(160deg,#20242e 0%,#12151c 45%,#0a0c11 100%);
+}
+#grain{position:fixed;inset:0;z-index:2;pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(120% 100% at 50% 40%,#000 30%,transparent 90%)}
+#vignette{position:fixed;inset:0;z-index:3;pointer-events:none;
+  background:radial-gradient(140% 110% at 50% 35%,transparent 40%,rgba(0,0,0,.55) 100%)}
 
-        .circle-container {
-            position: relative;
-            width: 200px;
-            height: 200px;
-        }
+#topbar{position:fixed;top:0;left:0;right:0;z-index:5;padding:28px 40px;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  text-shadow:0 2px 14px rgba(0,0,0,.85)}
+#srv{font-size:22px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+#srv small{display:block;margin-top:6px;font-size:12px;font-weight:400;
+  letter-spacing:.22em;opacity:.6;font-family:Consolas,monospace}
 
-        .rune-circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 200px;
-            height: 200px;
-            border: 2px solid #4a4a4a;
-            border-radius: 50%;
-            animation: rotate 8s linear infinite;
-        }
+#hud{position:fixed;left:40px;bottom:120px;z-index:5;
+  text-shadow:0 3px 20px rgba(0,0,0,.9)}
+#code{font-family:Consolas,"Courier New",monospace;font-size:12px;
+  letter-spacing:.3em;opacity:.55;margin-bottom:2px}
+#pct{font-size:86px;line-height:.92;font-weight:800;letter-spacing:-.02em}
+#pct span{font-size:44px;font-weight:600;margin-left:2px}
+#status{font-size:17px;font-weight:700;letter-spacing:.02em;
+  line-height:1;padding-bottom:2px}
+#file{position:fixed;left:40px;bottom:96px;z-index:5;
+  font-family:Consolas,monospace;font-size:11px;letter-spacing:.08em;
+  opacity:.55;max-width:640px;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;height:14px;
+  text-shadow:0 2px 10px rgba(0,0,0,.9)}
 
-        .rune {
-            position: absolute;
-            font-size: 24px;
-            color: #6b5b95;
-            opacity: 0.8;
-        }
+#barwrap{position:fixed;left:0;right:0;bottom:114px;z-index:5;height:6px;
+  background:rgba(255,255,255,.14);
+  --gap-a:0px; --gap-b:0px;
+  -webkit-mask-image:linear-gradient(90deg,#000 0 var(--gap-a),
+        transparent var(--gap-a) var(--gap-b),#000 var(--gap-b) 100%);
+          mask-image:linear-gradient(90deg,#000 0 var(--gap-a),
+        transparent var(--gap-a) var(--gap-b),#000 var(--gap-b) 100%)}
+#bar{height:100%;width:0%;transition:width .45s cubic-bezier(.4,0,.2,1);
+  background:var(--accent);
+  box-shadow:0 0 22px rgba(255,122,26,.75);position:relative}
 
-        .rune:nth-child(1) {
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+#banner{position:fixed;left:0;right:0;bottom:0;z-index:6;min-height:114px;
+  background:var(--banner-bg);color:var(--banner-text);
+  display:flex;align-items:center;padding:22px 56px 22px 40px}
+#tip{font-size:21px;font-weight:700;line-height:1.32;max-width:1500px;
+  transition:opacity .5s ease}
+#tip.out{opacity:0}
+#marks{position:absolute;right:22px;top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:10px;opacity:.5}
+#marks i{width:16px;height:16px;border:1.6px solid var(--banner-text);
+  border-radius:50%;display:block;position:relative}
+#marks i::after{content:"";position:absolute;left:50%;top:50%;width:5px;height:5px;
+  margin:-2.5px 0 0 -2.5px;background:var(--banner-text);border-radius:50%}
+#chips{position:fixed;left:40px;bottom:0;z-index:7;display:flex;height:6px;width:150px}
+#chips b{flex:1}
+#chips b:nth-child(1){background:#e2456b}
+#chips b:nth-child(2){background:#f0f0f0}
+#chips b:nth-child(3){background:var(--accent)}
+#chips b:nth-child(4){background:var(--accent-2)}
 
-        .rune:nth-child(2) {
-            top: 50%;
-            right: 0;
-            transform: translateY(-50%);
-        }
-
-        .rune:nth-child(3) {
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-        }
-
-        .rune:nth-child(4) {
-            top: 50%;
-            left: 0;
-            transform: translateY(-50%);
-        }
-
-        .inner-circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 160px;
-            height: 160px;
-            border: 1px solid #6b5b95;
-            border-radius: 50%;
-            animation: rotate 12s linear infinite reverse;
-        }
-
-        .outer-circle {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 240px;
-            height: 240px;
-            border: 1px solid #6b5b95;
-            border-radius: 50%;
-            animation: rotate 16s linear infinite;
-        }
-
-        .loading-text {
-            margin-top: 40px;
-            font-size: 24px;
-            letter-spacing: 4px;
-            animation: pulse 2s infinite;
-        }
-
-        .server-name {
-            font-size: 36px;
-            letter-spacing: 6px;
-            color: #6b5b95;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .progress-bar {
-            width: 80%;
-            height: 4px;
-            background: #4a4a4a;
-            position: absolute;
-            bottom: 10%;
-            overflow: hidden;
-        }
-
-        .progress-bar-inner {
-            height: 100%;
-            width: 0%;
-            background: #6b5b95;
-            transition: width 0.3s ease;
-        }
-
-        .tip-text {
-            position: absolute;
-            bottom: 5%;
-            font-size: 18px;
-            opacity: 0.7;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .glitch-char {
-            display: inline-block;
-            animation: glitch-char 0.2s infinite;
-        }
-
-        @keyframes rotate {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.4; }
-            50% { opacity: 1; }
-            100% { opacity: 0.4; }
-        }
-
-        @keyframes glitch-char {
-            0%, 100% { transform: translate(0, 0); }
-            25% { transform: translate(var(--glitch-x1), var(--glitch-y1)); }
-            50% { transform: translate(var(--glitch-x2), var(--glitch-y2)); }
-            75% { transform: translate(var(--glitch-x3), var(--glitch-y3)); }
-        }
-    </style>
+@media (max-height:800px){
+  #pct{font-size:64px} #hud{bottom:110px} #barwrap{bottom:104px}
+  #file{bottom:86px} #banner{min-height:104px} #tip{font-size:18px}
+}
+</style>
 </head>
 <body>
-    <div class="server-name" id="server-name"></div>
-    
-    <div class="loading-container">
-        <div class="circle-container">
-            <div class="outer-circle"></div>
-            <div class="rune-circle">
-                <div class="rune">☘</div>
-                <div class="rune">✧</div>
-                <div class="rune">❋</div>
-                <div class="rune">✦</div>
-            </div>
-            <div class="inner-circle"></div>
-        </div>
-        <div class="status" id="status"></div>
-    </div>
-    
-    <div class="progress-bar"><div class="progress-bar-inner" id="progress"></div></div>
-    <div class="tip-text" id="tip"></div>
 
-    <script>
+<div id="bg" class="fallback"></div>
+<div id="bg2"></div>
+<div id="grain"></div>
+<div id="vignette"></div>
 
-        function GameDetails(servername) {
-            document.getElementById("server-name").innerText = servername || "Загрузка сервера...";
-        }
+<div id="topbar">
+  <div id="srv">
+    <div id="srvname">Загрузка сервера</div>
+    <small id="srvmap">map: —</small>
+  </div>
+</div>
 
-        function SetStatusChanged(status) {
-            document.getElementById("status").innerText = status;
-        }
-        
-        const tips = [
-            "Вы знали что кровотечение увеличивается от вашего интеллекта?",
-            "Кинжал не очень хорош против двуручного меча",
-            "Не пытайтесь найти все кристаллы",
-            "Богиня не довольна вами",
-            "Сможете ли вы найти рецепт забытого воскрешающего зелья?",
-            "Помните, что вам нужно больше золота",
-            "Благословение богини покинуло вас...",
-            "Не ходите ночью возле руин",
-            "Ходят слухи что в старом городе Астерия досих пор блуждают духи мертвых",
-            "Для использования магии на себя, удерживайте кнопку R",
-        ];
+<div id="hud">
+  <div id="code">//. ------ ---- ---</div>
+  <div id="pct">0<span>%</span></div>
+  <div id="status">Loading Resources</div>
+</div>
 
-        const glitchTips = ["Богиня не довольна вами", "Благословение богини покинуло вас...", "Ходят слухи что в старом городе Астерия досих пор блуждают духи мертвых",];
+<div id="barwrap"><div id="bar"></div></div>
+<div id="file"></div>
 
-        function createGlitchChar(char) {
-            const x1 = (Math.random() * 10 - 5);
-            const y1 = (Math.random() * 10 - 5);
-            const x2 = (Math.random() * 10 - 5);
-            const y2 = (Math.random() * 10 - 5);
-            const x3 = (Math.random() * 10 - 5);
-            const y3 = (Math.random() * 10 - 5);
-            
-            return `<span class="glitch-char" style="--glitch-x1: ${x1}px; --glitch-y1: ${y1}px; --glitch-x2: ${x2}px; --glitch-y2: ${y2}px; --glitch-x3: ${x3}px; --glitch-y3: ${y3}px;">` +
-                   (Math.random() < 0.1 ? '∎' : char) +
-                   "</span>";
-        }
+<div id="banner">
+  <div id="tip">Подключение к серверу…</div>
+  <div id="marks"><i></i><i></i></div>
+</div>
+<div id="chips"><b></b><b></b><b></b><b></b></div>
 
-        function applyGlitchEffect(text) {
-            return text.split('').map(char => {
-                return char === ' ' ? ' ' : createGlitchChar(char);
-            }).join('');
-        }
+<script>
+var CONFIG = {
 
-        function updateGlitchAnimation() {
-            const glitchElements = document.querySelectorAll('.glitch-char');
-            glitchElements.forEach(element => {
-                const x1 = (Math.random() * 10 - 5);
-                const y1 = (Math.random() * 10 - 5);
-                const x2 = (Math.random() * 10 - 5);
-                const y2 = (Math.random() * 10 - 5);
-                const x3 = (Math.random() * 10 - 5);
-                const y3 = (Math.random() * 10 - 5);
-                
-                element.style.setProperty('--glitch-x1', `${x1}px`);
-                element.style.setProperty('--glitch-y1', `${y1}px`);
-                element.style.setProperty('--glitch-x2', `${x2}px`);
-                element.style.setProperty('--glitch-y2', `${y2}px`);
-                element.style.setProperty('--glitch-x3', `${x3}px`);
-                element.style.setProperty('--glitch-y3', `${y3}px`);
-            });
-        }
+  folder:    "img/",
+  listFile:  "list.txt",
+  exts:      ["jpg","jpeg","png","webp","gif","bmp"],
+  maxImages: 60,
+  shuffle:   false,
+  ROTATE_TIME: 60000,
 
-        function updateTip() {
-            let tipElement = document.getElementById("tip");
-            tipElement.style.opacity = 0;
-            setTimeout(() => {
-                let tip = tips[Math.floor(Math.random() * tips.length)];
-                if (glitchTips.includes(tip)) {
-                    tip = applyGlitchEffect(tip);
-                    // Start updating glitch animation for this tip
-                    setInterval(updateGlitchAnimation, 200);
-                }
-                tipElement.innerHTML = tip;
-                tipElement.style.opacity = 1;
-            }, 1000);
-        }
+  images: [],
 
-        setInterval(updateTip, 5000);
-        updateTip();
-    </script>
+  tips: [
+    "17 января 2030 года произошёл Инцидент на острове Бэйлань — первый массовый выброс коллапс-радиации из руин неизвестной древней цивилизации.",
+    "За двадцать с лишним лет после Инцидента на острове Бэйлань аварии в Северной Америке, Западной и Центральной Европе разнесли коллапс-радиацию почти по всему миру.",
+    "Города Белых зон под юрисдикцией правительства URNC соединены сетью скоростного дальнего сообщения — «Межконтинентальной железной дорогой».",
+    "На основе существующей технологии стационарных очистных башен правительства НСС и URNC совместно разработали новую мобильную очистную башню.",
+    "В 2065 году G&K заключила соглашение с правительством НСС о расформировании организации, что привело к роспуску ЧВК и консалтинговой компании G&K.",
+    "В 2065 году ограничения на размер ЧВК вызвали всплеск числа охотников за головами. К 2067 году B.R.I.E.F. стала главным управляющим органом для них.",
+    "Согласно нашим данным, группировка, известная как «Варяги», появилась примерно в 2066 году.",
+    "В 2066 году правительство URNC начало разработку программы восстановления, нацеленной на очистку заражённых зон и расширение городов.",
+    "В 2066 году правительство НСС подписало соглашение с правительством URNC, начав процесс присоединения к URNC.",
+    "В 2067 году правительство URNC запустило проект «Лазарь» — программу очистки и восстановления заражённых зон.",
+    "В 2067 году Союз Россартристских Наций и Новый Советский Союз подписали «Совместное соглашение о восстановлении и возрождении европейских зон коллапс-радиационного заражения».",
+    "В 2067 году правительство НСС начало серию пятилетних планов «возрождения», известных под общим названием «Новое движение на Запад».",
+    "В 2067 году URNC ужесточила процедуру выдачи новых патентных лицензий на «кукол».",
+    "В 2067 году восстание «Сангвис Ферри» было полностью подавлено, а патенты на технологии их продукции автоматически перешли в общественное достояние.",
+    "В 2067 году операция Госбезопасности по запрету арен «кукол» была успешно проведена.",
+    "К 2070 году большинство безопасных зон Южной Америки, Европы и северной Азии вошли в состав URNC.",
+    "С 2070 года доля диких животных, поражённых E.L.I.D. и имеющих тяжёлые мутации, растёт с каждым годом.",
+    "В 2071 году 16Lab представила третье поколение технологии «кукол».",
+    "Группа экологического анализа заражённых зон URNC впервые зафиксировала появление E.L.I.D. слитного типа примерно в 2071 году. Такие существа получили обозначение «Буджум»."
+  ],
+  TIP_TIME: 9000,
+
+  showFileNames: true
+};
+
+(function(){
+  var $  = function(id){ return document.getElementById(id); };
+  var total = 0, needed = 0, pct = 0, demo = null;
+  var shots = [], si = 0, front = false, shown = false;
+
+  var IMG_RX = new RegExp("\\.(" + CONFIG.exts.join("|") + ")$", "i");
+
+  function probe(url, ok, fail){
+    var im = new Image();
+    im.onload  = function(){ ok(url); };
+    im.onerror = fail;
+    im.src = url;
+  }
+
+  function xhrGet(url, ok, fail){
+    try {
+      var r = new XMLHttpRequest();
+      r.open("GET", url, true);
+      r.onreadystatechange = function(){
+        if (r.readyState !== 4) return;
+        var s = r.status;
+        if ((s >= 200 && s < 300 || s === 0) && r.responseText) ok(r.responseText);
+        else fail();
+      };
+      r.onerror = fail;
+      r.send(null);
+    } catch (e) { fail(); }
+  }
+
+  function parseList(text){
+    var out = [], seen = {};
+    function add(h){
+      if (!h) return;
+      h = String(h).split("?")[0].split("#")[0];
+      if (!IMG_RX.test(h)) return;
+      var url = (/^(https?:)?\/\//i.test(h) || h.charAt(0) === "/")
+        ? h : CONFIG.folder + h.replace(/^\.?\//, "");
+      if (seen[url]) return;
+      seen[url] = 1; out.push(url);
+    }
+    try {
+      var doc = new DOMParser().parseFromString(text, "text/html");
+      var a = doc.getElementsByTagName("a");
+      for (var i = 0; i < a.length; i++) add(a[i].getAttribute("href"));
+    } catch (e) {}
+    if (!out.length) {
+      var rx = /[^"'<>\s\\]+\.(?:jpe?g|png|webp|gif|bmp)/gi, m;
+      while ((m = rx.exec(text))) add(m[0]);
+    }
+    return out.sort(function(x, y){
+      return x.replace(/\d+/g, function(d){ return ("00000000" + d).slice(-8); })
+        .localeCompare(y.replace(/\d+/g, function(d){ return ("00000000" + d).slice(-8); }));
+    });
+  }
+
+  function verify(list, done){
+    var res = [], left = list.length;
+    if (!left) { done([]); return; }
+    for (var i = 0; i < list.length; i++) (function(idx){
+      probe(list[idx],
+        function(u){ res[idx] = u; if (!--left) done(res); },
+        function(){ if (!--left) done(res); });
+    })(i);
+  }
+
+  function use(list){
+    var clean = [];
+    for (var i = 0; i < list.length; i++) if (list[i]) clean.push(list[i]);
+    if (!clean.length) { scan(1, 0); return; }
+    if (CONFIG.shuffle)
+      for (var j = clean.length - 1; j > 0; j--) {
+        var k = Math.floor(Math.random() * (j + 1)), t = clean[j];
+        clean[j] = clean[k]; clean[k] = t;
+      }
+    shots = clean;
+    show(shots[0]); shown = true;
+    startRotation();
+  }
+
+  function scan(n, miss){
+    if (n > CONFIG.maxImages || miss >= 3) { startRotation(); return; }
+    var e = 0;
+    (function tryExt(){
+      if (e >= CONFIG.exts.length) { scan(n + 1, miss + 1); return; }
+      probe(CONFIG.folder + n + "." + CONFIG.exts[e++],
+        function(url){
+          shots.push(url);
+          if (!shown) { show(url); shown = true; }
+          scan(n + 1, 0);
+        },
+        tryExt);
+    })();
+  }
+
+  function show(url){
+    var layer = front ? $("bg") : $("bg2");
+    layer.style.backgroundImage = "url('" + url + "')";
+    if (front) { $("bg").classList.remove("fallback"); $("bg2").classList.remove("on"); }
+    else       { $("bg2").classList.add("on"); }
+    front = !front;
+  }
+
+  function startRotation(){
+    if (shots.length < 2) return;
+    setInterval(function(){
+      si = (si + 1) % shots.length;
+      show(shots[si]);
+    }, CONFIG.ROTATE_TIME);
+  }
+
+  function tryText(text, next){
+    var list = parseList(text);
+    if (!list.length) { next(); return; }
+    verify(list, function(res){
+      var got = 0;
+      for (var i = 0; i < res.length; i++) if (res[i]) got++;
+      if (got) use(res); else next();
+    });
+  }
+
+  if (CONFIG.images && CONFIG.images.length) {
+    verify(CONFIG.images.slice(), use);
+  } else {
+    xhrGet(CONFIG.folder + CONFIG.listFile,
+      function(t){ tryText(t, tryIndex); },
+      tryIndex);
+  }
+
+  function tryIndex(){
+    xhrGet(CONFIG.folder,
+      function(t){ tryText(t, function(){ scan(1, 0); }); },
+      function(){ scan(1, 0); });
+  }
+
+  function pad(n, len){ n = String(n); while (n.length < len) n = "0" + n; return n; }
+  function tickCode(){
+    var d = new Date();
+    var g1 = pad(d.getFullYear() % 100, 2) + pad(d.getMonth() + 1, 2) + pad(d.getDate(), 2);
+    var g2 = pad(d.getHours(), 2) + pad(d.getMinutes(), 2);
+    var g3 = pad(d.getSeconds(), 2) + Math.floor(d.getMilliseconds() / 100);
+    $("code").textContent = "//. " + g1 + "-" + g2 + "-" + g3;
+  }
+  setInterval(tickCode, 100);
+  tickCode();
+
+  function updateGap(){
+    var h = $("hud").getBoundingClientRect();
+    var w = $("barwrap");
+    w.style.setProperty("--gap-a", Math.max(0, h.left - 16) + "px");
+    w.style.setProperty("--gap-b", (h.right + 16) + "px");
+  }
+  window.addEventListener("resize", updateGap);
+
+  function render(){
+    var p = Math.max(0, Math.min(100, Math.round(pct)));
+    $("pct").innerHTML = p + "<span>%</span>";
+    $("bar").style.width = p + "%";
+    updateGap();
+  }
+  function recalc(){
+    if (total > 0) { pct = ((total - needed) / total) * 100; render(); }
+  }
+
+  var ti = 0, tipEl = $("tip");
+  function showTip(i){
+    tipEl.classList.add("out");
+    setTimeout(function(){
+      tipEl.textContent = CONFIG.tips[i % CONFIG.tips.length];
+      tipEl.classList.remove("out");
+    }, 500);
+  }
+  if (CONFIG.tips.length) {
+    tipEl.textContent = CONFIG.tips[0];
+    if (CONFIG.tips.length > 1)
+      setInterval(function(){ showTip(++ti); }, CONFIG.TIP_TIME);
+  }
+
+  window.GameDetails = function(servername, serverurl, mapname, maxplayers, steamid, gamemode){
+    $("srvname").textContent = servername || "Garry's Mod";
+    $("srvmap").textContent  = "map: " + (mapname || "—");
+    if (demo) { clearInterval(demo); demo = null; }
+  };
+
+  window.SetFilesTotal = function(t){ total = t; recalc(); };
+
+  window.SetFilesNeeded = function(n){ needed = n; recalc(); };
+
+  window.DownloadingFile = function(filename){
+    if (!CONFIG.showFileNames) return;
+    $("status").textContent = "Downloading Content";
+    $("file").textContent = String(filename).replace(/^.*[\\\/]/, "");
+    updateGap();
+  };
+
+  window.SetStatusChanged = function(status){
+    if (status) { $("status").textContent = status; updateGap(); }
+  };
+
+  demo = setInterval(function(){
+    pct += Math.random() * 3;
+    if (pct >= 100) { pct = 100; clearInterval(demo); demo = null; }
+    render();
+  }, 260);
+
+  render();
+})();
+</script>
 </body>
 </html>
